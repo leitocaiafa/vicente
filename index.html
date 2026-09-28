@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lista de regalos · Vicente</title>
+
+<!-- Tipografías: Fraunces (títulos) y Outfit (textos) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ====== 1. COLORES (cambiá acá y cambia toda la página) ====== */
+  :root {
+    --crema:    #f6efe2;  /* fondo general */
+    --tarjeta:  #fffaf1;  /* fondo de tarjetas */
+    --borde:    #ead9b8;
+    --miel:     #c8891a;  /* botones y barra */
+    --miel-osc: #a86f10;
+    --cafe:     #3b2a14;  /* títulos */
+    --texto:    #6b5638;  /* textos secundarios */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Outfit', sans-serif; background: var(--crema); color: var(--cafe); }
+  h1, h2, h3, .numero { font-family: 'Fraunces', serif; }
+
+  /* ====== 2. ENCABEZADO ====== */
+  .hero {
+    position: relative; overflow: hidden; text-align: center; color: #fff;
+    padding: 70px 20px 110px;
+    background: radial-gradient(circle at 80% 30%, #9c7440 0%, #6e4e26 45%, #4a3216 100%);
+  }
+  .etiqueta {
+    display: inline-block; background: var(--tarjeta); color: var(--cafe);
+    padding: 6px 16px; border-radius: 999px; font-size: 14px; font-weight: 500;
+  }
+  .subtitulo { margin-top: 22px; letter-spacing: 4px; font-size: 14px; font-weight: 500; opacity: .9; }
+  .hero h1 { font-size: clamp(56px, 10vw, 84px); line-height: 1.1; margin: 6px 0 18px; }
+  .hero p { max-width: 620px; margin: 0 auto 14px; line-height: 1.6; font-size: 17px; }
+
+  /* Abejitas que vuelan en el fondo */
+  .volando { position: absolute; width: 70px; opacity: .55; animation: flotar 6s ease-in-out infinite; }
+  .volando.b1 { top: 30px;  left: 8%;  }
+  .volando.b2 { top: 180px; left: 18%; width: 50px; animation-delay: 1.5s; }
+  .volando.b3 { top: 40px;  right: 12%; width: 55px; animation-delay: 3s; }
+  .volando.b4 { top: 200px; right: 6%;  width: 80px; animation-delay: 2s; }
+  @keyframes flotar { 0%,100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-14px) rotate(5deg); } }
+
+  /* Fila de iconitos redondos que "pisa" el borde del encabezado */
+  .iconos { display: flex; justify-content: center; gap: 10px; margin-top: -45px; position: relative; }
+  .iconos .circulo { width: 86px; height: 86px; }
+
+  .circulo {
+    border-radius: 50%; background: var(--tarjeta); border: 3px solid #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,.12); display: grid; place-items: center; overflow: hidden;
+  }
+  .circulo svg, .circulo img { width: 75%; height: 75%; object-fit: contain; }
+
+  /* ====== 3. CONTENIDO ====== */
+  main { max-width: 1100px; margin: 40px auto 60px; padding: 0 16px; }
+
+  .panel { background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 24px; box-shadow: 0 4px 14px rgba(59,42,20,.06); }
+
+  .contador { padding: 26px 30px; }
+  .contador .fila { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 8px; }
+  .contador small { letter-spacing: 3px; font-size: 13px; color: var(--texto); font-weight: 500; }
+  .numero { font-size: 34px; margin-top: 4px; }
+  .contador .ayuda { color: var(--texto); }
+  .barra { height: 9px; background: var(--borde); border-radius: 99px; margin-top: 18px; overflow: hidden; }
+  .barra div { height: 100%; background: var(--miel); border-radius: 99px; transition: width .6s; }
+
+  /* Grilla de regalos disponibles */
+  .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin: 30px 0 50px; }
+  .regalo { overflow: hidden; display: flex; flex-direction: column; }
+  .regalo .foto { background: #f3ead8; height: 160px; display: grid; place-items: center; }
+  .regalo .foto svg, .regalo .foto img { height: 130px; width: 130px; object-fit: contain; }
+  .regalo .cuerpo { padding: 20px 24px 24px; display: flex; flex-direction: column; flex: 1; }
+  .regalo h3 { font-size: 22px; }
+  .regalo p { color: var(--texto); margin: 6px 0 14px; flex: 1; }
+  .ver-link { color: var(--miel-osc); font-weight: 500; text-decoration: none; margin-bottom: 16px; font-size: 15px; }
+  .ver-link:hover { text-decoration: underline; }
+
+  .boton {
+    background: var(--miel); color: #fff; border: 0; border-radius: 14px;
+    padding: 15px; font: 600 16px 'Outfit', sans-serif; cursor: pointer; width: 100%;
+  }
+  .boton:hover { background: var(--miel-osc); }
+  .boton:disabled { opacity: .6; cursor: wait; }
+
+  /* Lista de ya reservados */
+  h2 { font-size: 26px; }
+  .nota { color: var(--texto); margin: 4px 0 16px; }
+  .reservado { display: flex; align-items: center; gap: 16px; padding: 14px 24px; border-top: 1px solid var(--borde); }
+  .reservado:first-child { border-top: 0; }
+  .check { width: 38px; height: 38px; flex-shrink: 0; border-radius: 50%; background: #f3e6cc; color: var(--miel); display: grid; place-items: center; font-weight: 600; }
+  .reservado .circulo { width: 48px; height: 48px; flex-shrink: 0; border-width: 2px; box-shadow: none; }
+  .reservado b { font-weight: 500; font-size: 17px; }
+  .reservado span { display: block; color: var(--texto); font-size: 15px; }
+
+  .vacio { text-align: center; padding: 30px; color: var(--texto); grid-column: 1 / -1; }
+
+  /* ====== 4. VENTANA PARA PONER EL NOMBRE ====== */
+  .fondo-modal { position: fixed; inset: 0; background: rgba(40,28,12,.55); display: none; place-items: center; padding: 16px; z-index: 10; }
+  .fondo-modal.abierto { display: grid; }
+  .modal { background: var(--tarjeta); border-radius: 24px; padding: 30px; width: 100%; max-width: 420px; text-align: center; }
+  .modal h3 { font-size: 24px; margin-bottom: 6px; }
+  .modal p { color: var(--texto); margin-bottom: 18px; }
+  .modal input { width: 100%; padding: 14px; border: 1px solid var(--borde); border-radius: 12px; font: 16px 'Outfit', sans-serif; margin-bottom: 14px; background: #fff; }
+  .modal .cancelar { background: none; border: 0; color: var(--texto); margin-top: 10px; cursor: pointer; font: 15px 'Outfit', sans-serif; }
+  .mensaje { color: #b3261e; min-height: 20px; margin-bottom: 8px; font-size: 14px; }
+
+  @media (max-width: 600px) {
+    .iconos .circulo { width: 58px; height: 58px; }
+    .iconos { margin-top: -30px; gap: 6px; }
+    .reservado { padding: 12px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div id="abejas-fondo"></div>
+  <span class="etiqueta">Baby shower de abejitas</span>
+  <div class="subtitulo">LISTA DE REGALOS</div>
+  <h1>Vicente</h1>
+  <p>🍯 Si querés mimar a Vicente con un regalito, preparamos una pequeña lista con algunas cositas que todavía necesitamos para recibirlo con mucho amor. 💛</p>
+  <p>Tu presencia es, sin dudas, lo más importante. ¡Muchas gracias!</p>
+</header>
+
+<div class="iconos" id="iconos"></div>
+
+<main>
+  <section class="panel contador">
+    <small>DISPONIBLES</small>
+    <div class="fila">
+      <div class="numero" id="numero">…</div>
+      <div class="ayuda">Tocá un regalo, poné tu nombre y queda para vos.</div>
+    </div>
+    <div class="barra"><div id="barra" style="width:0%"></div></div>
+  </section>
+
+  <section class="grilla" id="disponibles"></section>
+
+  <section id="seccion-reservados">
+    <h2>Ya reservados</h2>
+    <p class="nota">Estos ya no aparecen en la lista para elegir.</p>
+    <div class="panel" id="reservados"></div>
+  </section>
+</main>
+
+<!-- Ventana emergente -->
+<div class="fondo-modal" id="modal">
+  <div class="modal">
+    <h3 id="modal-titulo">Regalo</h3>
+    <p>Escribí tu nombre para reservarlo</p>
+    <input id="modal-nombre" placeholder="Tu nombre" maxlength="60">
+    <div class="mensaje" id="modal-mensaje"></div>
+    <button class="boton" id="modal-confirmar">Confirmar 🐝</button>
+    <button class="cancelar" id="modal-cancelar">Cancelar</button>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   CONFIGURACIÓN: pegá acá la URL /exec de tu Apps Script.
+   Mientras esté vacía, la página muestra datos de prueba.
+   ========================================================= */
+const API = 'https://script.google.com/macros/s/AKfycbzPPF909g7-Wt8lJnikbWqb0Y4exJdf0BUTQeFYdmQfOr0CI7W1S59yPh3IoLQRmwZe/exec';
+
+/* Datos de prueba (solo se usan si API está vacía) */
+const DEMO = [
+  { id: 1, nombre: 'Kit post parto', descripcion: 'Para mamá, después del parto', icono: 'abeja', regaladoPor: '' },
+  { id: 2, nombre: 'Mamaderas Avent', descripcion: 'Set de 3 mamaderas anticólicos', icono: 'miel', regaladoPor: '', link: 'https://www.google.com/search?q=mamaderas+avent' },
+  { id: 3, nombre: 'Butaca auto', descripcion: 'Grupo 0+', icono: 'colmena', regaladoPor: 'Luis y Liliana' },
+  { id: 4, nombre: 'Muselinas', descripcion: 'Pack de 4', icono: 'panal', regaladoPor: 'Fabi y Liber' },
+];
+
+/* ---------- Ilustraciones en SVG (dibujadas con código) ---------- */
+const ICONOS = {
+  abeja: `<svg viewBox="0 0 100 100"><ellipse cx="34" cy="32" rx="16" ry="20" fill="#fff" opacity=".8" transform="rotate(-25 34 32)"/><ellipse cx="62" cy="30" rx="14" ry="18" fill="#fff" opacity=".8" transform="rotate(20 62 30)"/><ellipse cx="50" cy="60" rx="30" ry="28" fill="#f4c542"/><path d="M24 52 Q50 46 76 52 L78 60 Q50 54 22 60Z" fill="#3b2a14"/><path d="M24 70 Q50 64 76 70 L73 77 Q50 72 27 77Z" fill="#3b2a14"/><circle cx="41" cy="44" r="3.5" fill="#3b2a14"/><circle cx="59" cy="44" r="3.5" fill="#3b2a14"/><circle cx="34" cy="50" r="4" fill="#f29b8a" opacity=".6"/><circle cx="66" cy="50" r="4" fill="#f29b8a" opacity=".6"/><path d="M45 50 Q50 54 55 50" stroke="#3b2a14" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
+  colmena: `<svg viewBox="0 0 100 100"><rect x="30" y="16" width="40" height="14" rx="7" fill="#d9a84e"/><rect x="22" y="28" width="56" height="16" rx="8" fill="#c99540"/><rect x="16" y="42" width="68" height="17" rx="8.5" fill="#d9a84e"/><rect x="14" y="57" width="72" height="17" rx="8.5" fill="#c99540"/><rect x="18" y="72" width="64" height="14" rx="7" fill="#b98535"/><ellipse cx="50" cy="75" rx="8" ry="9" fill="#5a3d18"/><rect x="10" y="84" width="80" height="6" rx="3" fill="#8fae6b"/></svg>`,
+  panal: `<svg viewBox="0 0 100 100"><g fill="#f0b53a" stroke="#d4912a" stroke-width="2.5"><polygon points="50,14 64,22 64,38 50,46 36,38 36,22"/><polygon points="31,46 45,54 45,70 31,78 17,70 17,54"/><polygon points="69,46 83,54 83,70 69,78 55,70 55,54"/><polygon points="50,58 64,66 64,82 50,90 36,82 36,66" fill="#f7cd62"/></g><ellipse cx="46" cy="28" rx="4" ry="6" fill="#fff" opacity=".5"/></svg>`,
+  flor: `<svg viewBox="0 0 100 100"><path d="M50 58 Q48 78 40 92" stroke="#7d9b5c" stroke-width="4" fill="none"/><ellipse cx="62" cy="80" rx="10" ry="5" fill="#8fae6b" transform="rotate(-30 62 80)"/><g fill="#fff" stroke="#eadfc6" stroke-width="1.5"><ellipse cx="50" cy="24" rx="9" ry="16"/><ellipse cx="50" cy="24" rx="9" ry="16" transform="rotate(60 50 42)"/><ellipse cx="50" cy="24" rx="9" ry="16" transform="rotate(120 50 42)"/><ellipse cx="50" cy="24" rx="9" ry="16" transform="rotate(180 50 42)"/><ellipse cx="50" cy="24" rx="9" ry="16" transform="rotate(240 50 42)"/><ellipse cx="50" cy="24" rx="9" ry="16" transform="rotate(300 50 42)"/></g><circle cx="50" cy="42" r="10" fill="#f4c542"/></svg>`,
+  miel: `<svg viewBox="0 0 100 100"><rect x="30" y="14" width="40" height="12" rx="4" fill="#b5835a"/><path d="M26 30 Q26 26 32 26 H68 Q74 26 74 30 V80 Q74 88 64 88 H36 Q26 88 26 80Z" fill="#f0a92c"/><path d="M26 30 Q26 26 32 26 H68 Q74 26 74 30 V38 Q66 44 60 38 Q54 48 46 38 Q38 44 26 38Z" fill="#fbe3b0"/><rect x="36" y="52" width="28" height="18" rx="4" fill="#fff" opacity=".85"/><ellipse cx="36" cy="60" rx="3" ry="12" fill="#fff" opacity=".35"/></svg>`,
+};
+const NOMBRES_ICONOS = Object.keys(ICONOS);
+
+/* Elige el dibujo de un regalo según la columna "icono" de la planilla.
+   Acepta: abeja, colmena, panal, flor, miel, o una ruta/URL a una imagen (img/xxx.png). */
+function icono(regalo, posicion) {
+  const valor = String(regalo.icono || '').trim();
+  const clave = valor.toLowerCase().replace(/\.(png|jpg|svg)$/, '');
+  if (ICONOS[clave]) return ICONOS[clave];
+  if (valor.includes('/') || /\.(png|jpe?g|webp|svg)$/i.test(valor)) return `<img src="${esc(valor)}" alt="">`;
+  return ICONOS[NOMBRES_ICONOS[posicion % NOMBRES_ICONOS.length]]; // si está vacío, rota los dibujos
+}
+
+/* Evita que alguien rompa la página escribiendo HTML en su nombre */
+function esc(texto) {
+  return String(texto).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
+
+/* Solo acepta links que empiecen con http:// o https:// */
+function linkSeguro(url) {
+  const valor = String(url || '').trim();
+  return /^https?:\/\//i.test(valor) ? valor : '';
+}
+
+/* ---------- Decoración fija ---------- */
+document.getElementById('abejas-fondo').innerHTML =
+  ['b1','b2','b3','b4'].map(c => `<div class="volando ${c}">${ICONOS.abeja}</div>`).join('');
+document.getElementById('iconos').innerHTML =
+  NOMBRES_ICONOS.map(n => `<div class="circulo">${ICONOS[n]}</div>`).join('');
+
+/* ---------- Datos ---------- */
+let regalos = [];
+
+async function cargar() {
+  if (!API) { regalos = DEMO; dibujar(); return; }
+  try {
+    const respuesta = await fetch(API);
+    regalos = await respuesta.json();
+    dibujar();
+  } catch (error) {
+    document.getElementById('disponibles').innerHTML =
+      '<div class="vacio">No pudimos cargar la lista. Probá recargar la página.</div>';
+  }
+}
+
+function dibujar() {
+  const disponibles = regalos.filter(r => !r.regaladoPor);
+  const reservados  = regalos.filter(r => r.regaladoPor);
+
+  // Contador y barra
+  document.getElementById('numero').textContent = `${disponibles.length} de ${regalos.length}`;
+  const porcentaje = regalos.length ? (reservados.length / regalos.length) * 100 : 0;
+  document.getElementById('barra').style.width = porcentaje + '%';
+
+  // Tarjetas de disponibles
+  document.getElementById('disponibles').innerHTML = disponibles.length
+    ? disponibles.map(r => `
+        <article class="panel regalo">
+          <div class="foto">${icono(r, regalos.indexOf(r))}</div>
+          <div class="cuerpo">
+            <h3>${esc(r.nombre)}</h3>
+            <p>${esc(r.descripcion || '')}</p>
+            ${linkSeguro(r.link) ? `<a class="ver-link" href="${esc(linkSeguro(r.link))}" target="_blank" rel="noopener">Ver ejemplo ↗</a>` : ''}
+            <button class="boton" onclick="abrirModal(${JSON.stringify(r.id)})">Lo regalo yo</button>
+          </div>
+        </article>`).join('')
+    : '<div class="vacio">¡Ya están todos reservados! Gracias por tanto amor 💛</div>';
+
+  // Lista de reservados
+  document.getElementById('seccion-reservados').style.display = reservados.length ? '' : 'none';
+  document.getElementById('reservados').innerHTML = reservados.map(r => `
+    <div class="reservado">
+      <div class="check">✓</div>
+      <div class="circulo">${icono(r, regalos.indexOf(r))}</div>
+      <div><b>${esc(r.nombre)}</b><span>Lo regala ${esc(r.regaladoPor)}</span></div>
+    </div>`).join('');
+}
+
+/* ---------- Ventana para reservar ---------- */
+let regaloElegido = null;
+const modal = document.getElementById('modal');
+const inputNombre = document.getElementById('modal-nombre');
+const mensaje = document.getElementById('modal-mensaje');
+const botonConfirmar = document.getElementById('modal-confirmar');
+
+function abrirModal(id) {
+  regaloElegido = regalos.find(r => r.id == id);
+  document.getElementById('modal-titulo').textContent = regaloElegido.nombre;
+  inputNombre.value = '';
+  mensaje.textContent = '';
+  modal.classList.add('abierto');
+  inputNombre.focus();
+}
+function cerrarModal() { modal.classList.remove('abierto'); }
+
+document.getElementById('modal-cancelar').onclick = cerrarModal;
+modal.onclick = e => { if (e.target === modal) cerrarModal(); };
+inputNombre.onkeydown = e => { if (e.key === 'Enter') confirmar(); };
+botonConfirmar.onclick = confirmar;
+
+async function confirmar() {
+  const nombre = inputNombre.value.trim();
+  if (!nombre) { mensaje.textContent = 'Poné tu nombre así sabemos quién lo regala 🙂'; return; }
+
+  botonConfirmar.disabled = true;
+  botonConfirmar.textContent = 'Guardando…';
+
+  try {
+    if (!API) {
+      regaloElegido.regaladoPor = nombre; // modo prueba: solo en esta pantalla
+    } else {
+      const respuesta = await fetch(API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' }, // evita el error de CORS con Apps Script
+        body: JSON.stringify({ id: regaloElegido.id, nombre })
+      });
+      const resultado = await respuesta.json();
+      if (!resultado.ok) {
+        mensaje.textContent = resultado.error === 'Ya lo reservaron'
+          ? 'Uy, alguien lo reservó recién. Elegí otro 🐝' : 'Algo falló, probá de nuevo.';
+        await cargar();
+        return;
+      }
+    }
+    cerrarModal();
+    await cargar();
+  } catch (error) {
+    mensaje.textContent = 'No pudimos guardar. Revisá la conexión y probá de nuevo.';
+  } finally {
+    botonConfirmar.disabled = false;
+    botonConfirmar.textContent = 'Confirmar 🐝';
+  }
+}
+
+cargar();
+</script>
+</body>
+</html>
