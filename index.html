@@ -79,9 +79,12 @@
   .regalo .cuerpo { padding: 20px 24px 24px; display: flex; flex-direction: column; flex: 1; }
   .regalo h3 { font-size: 22px; }
   .regalo p { color: var(--texto); margin: 6px 0 14px; flex: 1; }
-  .ver-link { color: var(--miel-osc); font-weight: 500; text-decoration: none; margin-bottom: 16px; font-size: 15px; }
-  .ver-link:hover { text-decoration: underline; }
-
+  .ver-link {
+    display: inline-flex; align-items: center; gap: 6px; align-self: flex-start;
+    background: #f3e6cc; color: var(--miel-osc); font-weight: 600; font-size: 14px;
+    padding: 8px 14px; border-radius: 999px; text-decoration: none; margin-bottom: 16px;
+  }
+  .ver-link:hover { background: #ecd9b3; }
   .boton {
     background: var(--miel); color: #fff; border: 0; border-radius: 14px;
     padding: 15px; font: 600 16px 'Outfit', sans-serif; cursor: pointer; width: 100%;
@@ -246,7 +249,7 @@ function dibujar() {
           <div class="cuerpo">
             <h3>${esc(r.nombre)}</h3>
             <p>${esc(r.descripcion || '')}</p>
-            ${linkSeguro(r.link) ? `<a class="ver-link" href="${esc(linkSeguro(r.link))}" target="_blank" rel="noopener">Ver ejemplo ↗</a>` : ''}
+            ${linkSeguro(r.link) ? `<a class="ver-link" href="${esc(linkSeguro(r.link))}" target="_blank" rel="noopener">🔎 Ver cómo es ↗</a>` : ''}
             <button class="boton" onclick="abrirModal(${JSON.stringify(r.id)})">Lo regalo yo</button>
           </div>
         </article>`).join('')
