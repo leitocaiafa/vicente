@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baby shower de Vicente · Nueva fecha</title>
+
+<!-- Lo que muestra WhatsApp al compartir el link -->
+<meta property="og:title" content="Baby shower de Vicente 🐝">
+<meta property="og:description" content="Nueva fecha: domingo 25 de octubre, 14.30 hs. ¡Te esperamos!">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ====== 1. COLORES ====== */
+  :root {
+    --papel:   #fbf6ec;  /* fondo */
+    --cafe:    #6e4326;  /* textos */
+    --cafe-2:  #9a7250;  /* textos suaves */
+    --miel:    #c8891a;
+    --rosa:    #e98fa6;  /* cartel "Nueva fecha" */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Outfit', sans-serif; color: var(--cafe);
+    background: var(--papel); min-height: 100vh;
+    display: flex; justify-content: center; padding: 24px 16px 40px;
+  }
+
+  .tarjeta { position: relative; width: 100%; max-width: 460px; text-align: center; }
+
+  /* ====== 2. DECORACIÓN DE ARRIBA (flores y abejas) ====== */
+  .arriba { position: relative; height: 190px; }
+  .arriba svg.flores { position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); width: 300px; }
+  .abeja { position: absolute; width: 46px; animation: volar 5s ease-in-out infinite; }
+  .abeja.a1 { top: 40px;  left: 6%; }
+  .abeja.a2 { top: 0;     right: 10%; width: 40px; animation-delay: 1.2s; }
+  .abeja.a3 { top: 110px; right: 2%; width: 36px; animation-delay: 2.4s; }
+  @keyframes volar { 0%,100% { transform: translate(0,0) rotate(-6deg); } 50% { transform: translate(6px,-10px) rotate(6deg); } }
+  .camino { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  /* ====== 3. LA COLMENA (bandas apiladas) ====== */
+  .colmena { position: relative; padding: 46px 28px 40px; }
+  .colmena .bandas { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; z-index: -1; }
+  .banda { border-radius: 999px; flex: 1; margin-top: -14px; }
+  .banda:nth-child(1) { width: 62%; background: #fbe6b4; margin-top: 0; }
+  .banda:nth-child(2) { width: 80%; background: #f9dfa3; }
+  .banda:nth-child(3) { width: 94%; background: #fbe6b4; }
+  .banda:nth-child(4) { width: 100%; background: #f9dfa3; }
+  .banda:nth-child(5) { width: 100%; background: #fbe6b4; }
+  .banda:nth-child(6) { width: 96%; background: #f9dfa3; border-radius: 40px 40px 28px 28px; }
+
+  /* ====== 4. TEXTOS ====== */
+  .cartel {
+    display: inline-block; background: var(--rosa); color: #fff;
+    font-weight: 600; letter-spacing: 1px; font-size: 15px;
+    padding: 7px 18px; border-radius: 999px; transform: rotate(-4deg);
+    box-shadow: 0 3px 8px rgba(233,143,166,.35); margin-bottom: 10px;
+  }
+  h1 { font-family: 'Dancing Script', cursive; font-weight: 700; line-height: 1; color: var(--cafe); }
+  h1 .chico { display: block; font-size: 46px; }
+  h1 .de    { display: block; font-size: 34px; margin: 2px 0; }
+  h1 .nombre{ display: block; font-size: 70px; }
+
+  .fecha-vieja { margin-top: 22px; color: var(--cafe-2); font-size: 16px; text-decoration: line-through; text-decoration-color: var(--rosa); text-decoration-thickness: 2px; opacity: .8; }
+  .fecha { font-size: 26px; font-weight: 600; margin-top: 4px; }
+  .hora  { font-size: 22px; margin-top: 2px; }
+
+  .direccion { margin-top: 20px; font-size: 19px; line-height: 1.4; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .direccion svg { width: 22px; flex-shrink: 0; }
+
+  /* ====== 5. BOTONES ====== */
+  .botones { display: flex; flex-direction: column; gap: 10px; margin: 26px auto 0; max-width: 300px; }
+  .boton {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 13px 18px; border-radius: 14px; text-decoration: none;
+    font-weight: 600; font-size: 16px; transition: transform .15s, background .15s;
+  }
+  .boton:active { transform: scale(.97); }
+  .principal  { background: var(--miel); color: #fff; }
+  .principal:hover { background: #a86f10; }
+  .secundario { background: rgba(255,255,255,.7); color: var(--cafe); border: 1px solid #e8c98a; }
+  .secundario:hover { background: #fff; }
+
+  .gracias { margin-top: 26px; font-size: 16px; color: var(--cafe-2); }
+
+  @media (max-width: 380px) {
+    h1 .nombre { font-size: 58px; }
+    h1 .chico  { font-size: 40px; }
+    .colmena   { padding: 40px 18px 34px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="tarjeta">
+
+  <!-- Flores y abejas -->
+  <div class="arriba">
+    <svg class="camino" viewBox="0 0 460 190" preserveAspectRatio="none" fill="none" stroke="#6e4326" stroke-width="1.6" stroke-dasharray="6 7" opacity=".45">
+      <path d="M20 170 C 10 120, 60 110, 50 70"/>
+      <path d="M440 30 C 400 10, 380 70, 350 40 C 330 20, 360 0, 380 20"/>
+      <path d="M440 130 C 420 170, 380 160, 400 120"/>
+    </svg>
+    <div class="abeja a1" id="abeja1"></div>
+    <div class="abeja a2" id="abeja2"></div>
+    <div class="abeja a3" id="abeja3"></div>
+
+    <svg class="flores" viewBox="0 0 300 160">
+      <!-- tallos -->
+      <g stroke="#8d9a70" stroke-width="3" fill="none" stroke-linecap="round">
+        <path d="M70 160 Q 75 110 62 70"/><path d="M150 160 Q 148 90 160 45"/><path d="M232 160 Q 228 115 245 80"/>
+      </g>
+      <g fill="#a3ad86">
+        <ellipse cx="50" cy="120" rx="16" ry="8" transform="rotate(20 50 120)"/>
+        <ellipse cx="175" cy="95" rx="16" ry="8" transform="rotate(-25 175 95)"/>
+        <ellipse cx="215" cy="130" rx="14" ry="7" transform="rotate(25 215 130)"/>
+      </g>
+      <!-- flor izquierda -->
+      <g transform="translate(62 62)" fill="#f4a6a0" stroke="#e98a86" stroke-width="1.2">
+        <circle cx="0" cy="-16" r="13"/><circle cx="15" cy="-5" r="13"/><circle cx="9" cy="13" r="13"/><circle cx="-9" cy="13" r="13"/><circle cx="-15" cy="-5" r="13"/>
+        <circle r="5" fill="#d9534f" stroke="none"/>
+      </g>
+      <!-- flor centro -->
+      <g transform="translate(160 38)" fill="#f2b6cf" stroke="#dc86ad" stroke-width="1.2">
+        <ellipse cx="0" cy="-16" rx="10" ry="15"/><ellipse cx="16" cy="-4" rx="10" ry="15" transform="rotate(72 16 -4)"/><ellipse cx="10" cy="14" rx="10" ry="15" transform="rotate(144 10 14)"/><ellipse cx="-10" cy="14" rx="10" ry="15" transform="rotate(216 -10 14)"/><ellipse cx="-16" cy="-4" rx="10" ry="15" transform="rotate(288 -16 -4)"/>
+        <circle r="5" fill="#c2407e" stroke="none"/>
+      </g>
+      <!-- flor derecha -->
+      <g transform="translate(246 74)" fill="#f0c1dc" stroke="#d98bb8" stroke-width="1.2">
+        <circle cx="0" cy="-15" r="12"/><circle cx="14" cy="-5" r="12"/><circle cx="9" cy="12" r="12"/><circle cx="-9" cy="12" r="12"/><circle cx="-14" cy="-5" r="12"/>
+        <circle r="4.5" fill="#d0527f" stroke="none"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Colmena con la información -->
+  <div class="colmena">
+    <div class="bandas">
+      <div class="banda"></div><div class="banda"></div><div class="banda"></div>
+      <div class="banda"></div><div class="banda"></div><div class="banda"></div>
+    </div>
+
+    <div class="cartel">¡NUEVA FECHA!</div>
+
+    <h1>
+      <span class="chico">Baby Shower</span>
+      <span class="de">de</span>
+      <span class="nombre">Vicente</span>
+    </h1>
+
+    <p class="fecha-vieja">Sábado 24 de octubre</p>
+    <p class="fecha">Domingo 25 de octubre</p>
+    <p class="hora">14.30 hs.</p>
+
+    <p class="direccion">
+      <svg viewBox="0 0 24 24" fill="#6e4326"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+      <span>Ramallo 1512<br>Bosques</span>
+    </p>
+
+    <div class="botones">
+      <!-- Link de Google Maps -->
+      <a class="boton principal" href="https://maps.app.goo.gl/Se7B2jMszNFCf3Am9" target="_blank" rel="noopener">📍 Cómo llegar</a>
+      <!-- Agrega el evento al Google Calendar de quien lo toque (14.30 a 17.30 hora Argentina) -->
+      <a class="boton secundario" target="_blank" rel="noopener"
+         href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Baby%20shower%20de%20Vicente%20%F0%9F%90%9D&dates=20261025T173000Z/20261025T203000Z&location=Ramallo%201512%2C%20Bosques&details=%C2%A1Te%20esperamos!%20Lista%20de%20regalos%3A%20https%3A%2F%2Fleitocaiafa.github.io%2Fvicente%2F">📅 Agendar en el calendario</a>
+      <!-- Lleva a la lista de regalos (el index.html del mismo repo) -->
+      <a class="boton secundario" href="./">🎁 Ver lista de regalos</a>
+    </div>
+
+    <p class="gracias">¡Te esperamos! 💛</p>
+  </div>
+</div>
+
+<script>
+  /* Dibujo de la abejita (el mismo de la lista de regalos) */
+  const ABEJA = `<svg viewBox="0 0 100 100"><ellipse cx="34" cy="32" rx="16" ry="20" fill="#fff" stroke="#d9cfc0" stroke-width="2" transform="rotate(-25 34 32)"/><ellipse cx="62" cy="30" rx="14" ry="18" fill="#fff" stroke="#d9cfc0" stroke-width="2" transform="rotate(20 62 30)"/><ellipse cx="50" cy="60" rx="30" ry="24" fill="#f4c56a"/><path d="M38 38 Q34 60 38 82" stroke="#4a3216" stroke-width="7" fill="none"/><path d="M54 36 Q50 60 54 84" stroke="#4a3216" stroke-width="7" fill="none"/><circle cx="72" cy="54" r="3" fill="#4a3216"/></svg>`;
+  ['abeja1','abeja2','abeja3'].forEach(id => document.getElementById(id).innerHTML = ABEJA);
+</script>
+</body>
+</html>
