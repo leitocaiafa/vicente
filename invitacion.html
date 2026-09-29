@@ -65,7 +65,8 @@
   h1 .de    { display: block; font-size: 34px; margin: 2px 0; }
   h1 .nombre{ display: block; font-size: 70px; }
 
-  .fecha-vieja { margin-top: 22px; color: var(--cafe-2); font-size: 16px; text-decoration: line-through; text-decoration-color: var(--rosa); text-decoration-thickness: 2px; opacity: .8; }
+  .agenda { margin-top: 22px; font-family: 'Dancing Script', cursive; font-weight: 700; font-size: 27px; color: #d9738e; }
+  .fecha-vieja { margin-top: 12px; color: var(--cafe-2); font-size: 16px; text-decoration: line-through; text-decoration-color: var(--rosa); text-decoration-thickness: 2px; opacity: .8; }
   .fecha { font-size: 26px; font-weight: 600; margin-top: 4px; }
   .hora  { font-size: 22px; margin-top: 2px; }
 
@@ -82,8 +83,8 @@
   .boton:active { transform: scale(.97); }
   .principal  { background: var(--miel); color: #fff; }
   .principal:hover { background: #a86f10; }
-  .secundario { background: rgba(255,255,255,.7); color: var(--cafe); border: 1px solid #e8c98a; }
-  .secundario:hover { background: #fff; }
+  .rosa { background: var(--rosa); color: #fff; }
+  .rosa:hover { background: #d9738e; }
 
   .gracias { margin-top: 26px; font-size: 16px; color: var(--cafe-2); }
 
@@ -152,6 +153,7 @@
       <span class="nombre">Vicente</span>
     </h1>
 
+    <p class="agenda">¡Agendá la nueva fecha!</p>
     <p class="fecha-vieja">Sábado 24 de octubre</p>
     <p class="fecha">Domingo 25 de octubre</p>
     <p class="hora">14.30 hs.</p>
@@ -164,11 +166,8 @@
     <div class="botones">
       <!-- Link de Google Maps -->
       <a class="boton principal" href="https://maps.app.goo.gl/Se7B2jMszNFCf3Am9" target="_blank" rel="noopener">📍 Cómo llegar</a>
-      <!-- Agrega el evento al Google Calendar de quien lo toque (14.30 a 17.30 hora Argentina) -->
-      <a class="boton secundario" target="_blank" rel="noopener"
-         href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Baby%20shower%20de%20Vicente%20%F0%9F%90%9D&dates=20261025T173000Z/20261025T203000Z&location=Ramallo%201512%2C%20Bosques&details=%C2%A1Te%20esperamos!%20Lista%20de%20regalos%3A%20https%3A%2F%2Fleitocaiafa.github.io%2Fvicente%2F">📅 Agendar en el calendario</a>
       <!-- Lleva a la lista de regalos (el index.html del mismo repo) -->
-      <a class="boton secundario" href="./">🎁 Ver lista de regalos</a>
+      <a class="boton rosa" href="./">🎁 Ver lista de regalos</a>
     </div>
 
     <p class="gracias">¡Te esperamos! 💛</p>
